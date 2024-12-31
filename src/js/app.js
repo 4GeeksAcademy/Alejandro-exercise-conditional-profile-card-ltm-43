@@ -28,33 +28,39 @@ function render(variables = {}) {
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
-  if (variables.name === null) {
-    variables.name = "Your name";
-  }
-  if (variables.lastName === null) {
-    variables.lastName = "Your last name";
-  }
-  if (variables.role === null) {
-    variables.role = "Profession";
-  }
-  if (variables.city === null) {
-    variables.city = "City";
-  }
-  if (variables.country === null) {
-    variables.country = "Country";
-  }
+
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>${variables.name} ${variables.lastName}</h1>
-          <h2>${variables.role}</h2>
-          <h3>${variables.city} ${variables.country}</h3>
-          <ul class="${variables.socialMediaPosition}">
-            <li><a href="https://x.com/${variables.twitter}"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/${variables.github}"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/${variables.linkedin}"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://www.instagram.com/${variables.instagram}"><i class="fab fa-instagram"></i></a></li>
+          <h1>${variables.name == null ? "Your name" : variables.name} ${
+    variables.lastName == null ? "Your Last name" : variables.lastName
+  }</h1>
+          <h2>${variables.role == null ? " " : variables.role}</h2>
+          <h3>${variables.city == null ? " " : variables.city} ${
+    variables.country == null ? " " : variables.country
+  }</h3>
+          <ul class="${
+            variables.socialMediaPosition == null
+              ? " "
+              : variables.socialMediaPosition
+          }">
+            <li><a href="https://x.com/${
+              variables.twitter == null ? "4Geeksacademy" : variables.twitter
+            }"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://github.com/${
+              variables.github == null ? "4Geeksacademy" : variables.github
+            }"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com${
+              variables.linkedin == null
+                ? "/school/4geeks-academy-latam/"
+                : "/in/" + variables.linkedin
+            }"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://www.instagram.com/${
+              variables.instagram == null
+                ? "4Geeksacademy"
+                : variables.instagram
+            }"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
